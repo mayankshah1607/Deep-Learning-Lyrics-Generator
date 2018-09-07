@@ -11,6 +11,6 @@ def init():
     # model.load_weights("model.h5")
     # model.compile(optimizer="adam", loss="categorical_crossentropy", metrics=["accuracy"])
     model = load_model('model.h5')
-
     graph = tf.get_default_graph()
+    
     return model,graph

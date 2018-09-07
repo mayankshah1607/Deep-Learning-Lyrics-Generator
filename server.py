@@ -8,6 +8,9 @@ import random
 from load import *
 import flask
 import pickle
+import keras.models  
+import tensorflow as tf   
+from keras.models import model_from_json, load_model
 
 df=pd.read_csv('data.csv')['text']
 data=np.array(df)
@@ -39,28 +42,30 @@ global model,graph
 model,graph = init()
 
 
+
 app = flask.Flask(__name__)
 
-@app.route("/predict", methods=["POST"])
+@app.route("/predict", methods=["GET"])
 def predict():
-
+	
 	generated=''
-	start_index=random.randint(0,len(corpus)-maxlen-1)
-	sent=corpus[start_index:start_index+maxlen]
-	generated+=sent
-	for i in range(1900):
-	    x_sample=generated[i:i+maxlen]
-	    x=np.zeros((1,maxlen,vocab_size))
-	    for j in range(maxlen):
-	        x[0,j,char_ix[x_sample[j]]]=1
-	    probs=model.predict(x)
-	    probs=np.reshape(probs,probs.shape[1])
-	    ix=np.random.choice(range(vocab_size),p=probs.ravel())
-	    generated+=ix_char[ix]
+	with graph.as_default():
+		start_index=random.randint(0,len(corpus)-maxlen-1)
+		sent=corpus[start_index:start_index+maxlen]
+		generated+=sent
+		for i in range(1900):
+		    x_sample=generated[i:i+maxlen]
+		    x=np.zeros((1,maxlen,vocab_size))
+		    for j in range(maxlen):
+		        x[0,j,char_ix[x_sample[j]]]=1
+		    probs=model.predict(x)
+		    probs=np.reshape(probs,probs.shape[1])
+		    ix=np.random.choice(range(vocab_size),p=probs.ravel())
+		    generated+=ix_char[ix]
 	data = {'lyrics' : generated}
 	return flask.jsonify(data)
 
 
 if __name__ == '__main__':
-    app.run(host='localhost',port = 3000, debug = True)
+    app.run(host='localhost',port = 3000, debug = False)
 
