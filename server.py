@@ -12,6 +12,10 @@ import keras.models
 import tensorflow as tf   
 from keras.models import model_from_json, load_model
 from flask_cors import CORS
+import os
+
+
+port = int(os.environ.get("PORT", 5000))
 
 df=pd.read_csv('data.csv')['text']
 data=np.array(df)
@@ -46,7 +50,7 @@ model,graph = init()
 
 app = flask.Flask(__name__)
 
-CORS(app)
+# CORS(app)
 
 @app.route("/predict", methods=["GET"])
 def predict():
@@ -70,5 +74,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port = 8000, debug = False)
+    app.run(host='0.0.0.0', port=port)
 
