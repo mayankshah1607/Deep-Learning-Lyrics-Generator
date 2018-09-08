@@ -11,6 +11,7 @@ import pickle
 import keras.models  
 import tensorflow as tf   
 from keras.models import model_from_json, load_model
+from flask_cors import CORS
 
 df=pd.read_csv('data.csv')['text']
 data=np.array(df)
@@ -45,6 +46,8 @@ model,graph = init()
 
 app = flask.Flask(__name__)
 
+CORS(app)
+
 @app.route("/predict", methods=["GET"])
 def predict():
 	
@@ -67,5 +70,5 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(host='localhost',port = 3000, debug = False)
+    app.run(host='0.0.0.0',port = 8000, debug = False)
 
