@@ -56,7 +56,7 @@ def predict():
 		start_index=random.randint(0,len(corpus)-maxlen-1)
 		sent=corpus[start_index:start_index+maxlen]
 		generated+=sent
-		for i in range(3):
+		for i in range(1000):
 		    x_sample=generated[i:i+maxlen]
 		    x=np.zeros((1,maxlen,vocab_size))
 		    for j in range(maxlen):
