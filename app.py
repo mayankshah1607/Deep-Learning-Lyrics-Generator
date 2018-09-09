@@ -14,9 +14,6 @@ from keras.models import model_from_json, load_model
 from flask_cors import CORS
 import os
 
-
-port = int(os.environ['PORT'])
-
 df=pd.read_csv('data.csv')['text']
 data=np.array(df)
 
@@ -74,5 +71,6 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
+	port = int(os.environ.get("PORT", 5000)
+    app.run(host='0.0.0.0', port=port,debug=True)
 
