@@ -47,7 +47,7 @@ model,graph = init()
 
 app = flask.Flask(__name__)
 
-# CORS(app)
+CORS(app)
 
 @app.route("/predict", methods=["GET"])
 def predict():
