@@ -66,6 +66,7 @@ def predict():
 		    probs=np.reshape(probs,probs.shape[1])
 		    ix=np.random.choice(range(vocab_size),p=probs.ravel())
 		    generated+=ix_char[ix]
+	print('Returning prediction...')
 	data = {'lyrics' : generated}
 	return flask.jsonify(data)
 
