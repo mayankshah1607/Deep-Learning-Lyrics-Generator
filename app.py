@@ -15,7 +15,7 @@ from flask_cors import CORS
 import os
 
 
-port = int(os.environ.get("PORT", 5000))
+port = int(os.environ.get("PORT", 8000))
 
 df=pd.read_csv('data.csv')['text']
 data=np.array(df)
