@@ -44,7 +44,6 @@ global model,graph
 model,graph = init()
 
 
-
 app = flask.Flask(__name__)
 
 CORS(app)
