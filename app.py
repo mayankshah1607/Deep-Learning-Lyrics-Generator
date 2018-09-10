@@ -13,7 +13,8 @@ import tensorflow as tf
 from keras.models import model_from_json, load_model
 from flask_cors import CORS
 import os
-
+import time
+from flask import request
 df=pd.read_csv('data.csv')['text']
 data=np.array(df)
 
@@ -56,7 +57,7 @@ def predict():
 		start_index=random.randint(0,len(corpus)-maxlen-1)
 		sent=corpus[start_index:start_index+maxlen]
 		generated+=sent
-		for i in range(450):
+		for i in range(200):
 		    x_sample=generated[i:i+maxlen]
 		    x=np.zeros((1,maxlen,vocab_size))
 		    for j in range(maxlen):
@@ -65,6 +66,7 @@ def predict():
 		    probs=np.reshape(probs,probs.shape[1])
 		    ix=np.random.choice(range(vocab_size),p=probs.ravel())
 		    generated+=ix_char[ix]
+
 	print('Returning prediction...')
 	data = {'lyrics' : generated}
 	return flask.jsonify(data)
