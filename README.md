@@ -1,7 +1,7 @@
-# Deep-Learning-Lyrics-Generator
+# Generating song lyrics like Maroon 5 (with a neural network)
 
-An AI that can generate new song lyrics similar to Maroon 5.
-This is an implementation of a Neural Language model (LSTM) that is trained on a dataset of Maroon 5 song lyrics.
+This is an implementation of a Neural Language model (built using an LSTM network) that is trained on a dataset of Maroon 5 song lyrics.
+
 
 Link to dataset : https://www.kaggle.com/mousehead/songlyrics/data
 
