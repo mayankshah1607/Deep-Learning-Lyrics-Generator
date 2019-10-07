@@ -10,7 +10,7 @@ Run the following commands:
 
 #### (training)
 ```
-1. pip install -r requrements.txt
+1. pip install -r requirements.txt
 2. python train.py
 ```
 
